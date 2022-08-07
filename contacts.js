@@ -8,23 +8,23 @@ const updateContactsFile = async (writtenData) => { await fs.writeFile(contactsP
 const listContacts = async () => {
   const data = await fs.readFile(contactsPath);
   const parseData = JSON.parse(data);
-  // console.log(parseData);
+  console.table(parseData);
   return parseData;
 };
 
 const getContactById = async (contactId) => {
   const data = await fs.readFile(contactsPath);
   const parseData = JSON.parse(data);
-  const selectedContact = parseData.find((el) => el.id === contactId);
-  // console.log(selectedContact);
+  const selectedContact = parseData.find((el) => el.id == contactId);
+  console.table(selectedContact);
   return selectedContact;
 };
 
 const removeContact = async (contactId) => {
   const data = await listContacts();
-  const updatedContacts = data.filter((el) => el.id !== contactId);
+  const updatedContacts = data.filter((el) => el.id != contactId);
   await updateContactsFile(updatedContacts);
-  // console.log(updatedContacts);
+  console.table(updatedContacts);
   return updatedContacts;
 };
 
@@ -37,9 +37,9 @@ const addContact = async (name, email, phone) => {
     phone,
   };
   data.push(addedContact);
-  // console.log(data);
-  await updateContactsFile(data); 
-  return addedContact  ;
+  await updateContactsFile(data);
+  console.table(data);
+  return addedContact;
 }
 
 module.exports = {
